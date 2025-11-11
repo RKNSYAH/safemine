@@ -14,31 +14,29 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    async function getWorkers() {
-      try {
-        const response = await fetch("http://localhost:3000/worker/101");
-        const responseData = await response.json();
-
-        const allDetections = responseData.data.flatMap(
-          (worker) => {
-            return (
-              worker.detections.map(detection => ({
+      async function getWorkers() {
+        try {
+          const response = await fetch("https://safemine-backend.netlify.app/api/worker/101"); 
+          const responseData = await response.json(); 
+          const allDetections = responseData.data.flatMap(worker => worker.detections.map(detection => ({
                 ...detection,
                 workerName: worker.fullName,
-              }))
-            );
-          }
-        );
-        setAlerts(allDetections);
-        setWorkers(responseData.data);
-      } catch (error) {
-        console.error("Failed to fetch workers:", error);
-      } finally {
-        setLoading(false);
+              })));
+          setAlerts(allDetections);
+          setWorkers(responseData.data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Failed to fetch workers:", error);
+        }
       }
-    }
-    getWorkers();
-  }, []);
+
+      getWorkers();
+
+      const intervalId = setInterval(getWorkers, 5000);
+
+      return () => clearInterval(intervalId);
+
+    }, []);
 
   const povs = workers.map((worker, idx) => ({
     id: worker._id,

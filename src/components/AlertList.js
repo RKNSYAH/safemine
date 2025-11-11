@@ -33,7 +33,7 @@ const AlertItem = ({ alert }) => {
           <div className="flex items-start justify-between gap-2">
             <div>
               <p className="font-semibold text-sm">{alert.warnLabel}</p>
-              {alert.worker && (
+              {alert.workerName && (
                 <p className="text-xs opacity-75 mt-1">{alert.workerName}</p>
               )}
             </div>
