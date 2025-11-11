@@ -8,7 +8,13 @@ module.exports = {
     theme: {
       // This 'extend' section is where you would add custom colors, fonts, etc.
       // We are leaving it empty for now, as your code uses Tailwind's defaults.
-      extend: {},
+      extend: {
+        colors: {
+            primary: '#F3F4F6',
+            secondary: '#2563EB',
+            tone: '#1F2937'
+          },
+      },
     },
     plugins: [],
   }

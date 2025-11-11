@@ -59,7 +59,7 @@ const Dashboard = () => {
       <div className="sticky top-0 z-40 bg-slate-800/80 border-b border-slate-700 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Shield className="w-7 h-7 text-purple-400" />
+            <Shield className="w-7 h-7 text-secondary" />
             <div>
               <h1 className="text-2xl font-bold text-white">
                 SafeMine Supervisor
@@ -82,7 +82,7 @@ const Dashboard = () => {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-              <Camera className="w-5 h-5 text-purple-400" />
+              <Camera className="w-5 h-5 text-secondary" />
               Live Cameras ({povs.length})
             </h2>
             <button className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
