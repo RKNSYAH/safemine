@@ -1,14 +1,7 @@
-import { useState, useEffect, useRef } from "react";
 import {
   AlertCircle,
   AlertTriangle,
-  Shield,
-  Camera,
-  LogOut,
   MapPin,
-  MessageSquare,
-  X,
-  RotateCw,
 } from "lucide-react";
 
 const AlertItem = ({ alert }) => {
@@ -18,13 +11,6 @@ const AlertItem = ({ alert }) => {
     info: "bg-blue-500/10 border-blue-500/50 text-blue-400",
   };
 
-  const IconComponent = {
-    critical: AlertTriangle,
-    warning: AlertCircle,
-    info: MessageSquare,
-  };
-  
-  console.log(alert);
 
   return (
     <div className={`border rounded-lg p-4  ${severityColor["critical"]}`}>

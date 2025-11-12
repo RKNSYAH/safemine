@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+
 import {
   Camera,
 } from "lucide-react";
