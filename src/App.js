@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -7,12 +7,10 @@ import {
   Outlet,
   useNavigate,
 } from 'react-router';
-
-
+import Cookies from "js-cookie";
 import { SupervisorLogin } from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
-// ============ Audio Utilities ============
 const playAlertSound = () => {
   try {
     const audioContext = new (window.AudioContext ||
@@ -37,23 +35,6 @@ const playAlertSound = () => {
   }
 };
 
-// ============ Mock Data Generator ============
-const hazardTypes = [
-  { type: "Fall Detected", severity: "critical" },
-  { type: "Unsafe Posture", severity: "critical" },
-  { type: "High Temperature Zone", severity: "warning" },
-  { type: "Missing Tool", severity: "info" },
-  { type: "Unprotected Area", severity: "warning" },
-];
-
-const locations = [
-  "Site A - North Building",
-  "Site B - South Entrance",
-  "Site C - Equipment Area",
-  "Site D - Scaffolding Zone",
-  "Site E - Electrical Room",
-];
-
 const AuthContext = createContext(null);
 
 export const useAuth = () => {
@@ -64,13 +45,23 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const supervisorData = Cookies.get('supervisorData');
+    if (supervisorData) {
+      setUser(supervisorData);
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
   const login = (userData) => {
     setUser(userData);
+    Cookies.set('supervisorData', userData.token, { expires: 7 });
     navigate('/dashboard'); 
   };
 
   const logout = () => {
     setUser(null);
+    Cookies.remove('supervisorData');
     navigate('/login'); 
   };
 
@@ -83,23 +74,14 @@ const ProtectedRoute = () => {
   const { user } = useAuth();
 
   if (!user) {
-    // If user is not logged in, redirect to login
     return <Navigate to="/login" replace />;
   }
 
-  // If user is logged in, render the child component (e.g., Dashboard)
-  // <Outlet> is a placeholder for the nested route's component
   return <Outlet />;
 };
 
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
   
 
     return (

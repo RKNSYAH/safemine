@@ -5,12 +5,30 @@ import { useState } from "react";
 export const SupervisorLogin = () => {
   const { login } = useAuth();
 
-  const [supervisorID, setSupervisorID] = useState("");
+  const [supervisorID, setSupervisorID] = useState();
   const [password, setPassword] = useState("");
+
+  const onLogin = async () => {
+    try {
+      const res = await fetch("https://safemine-backend-production.up.railway.app/supervisor/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ supervisorID: Number(supervisorID),password: password }),
+      })
+      const data = await res.json();
+      if (res.ok) {
+        login(data);
+      }
+    } catch (error) {
+      
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ id: supervisorID, name: "Supervisor" });
+    onLogin({ id: supervisorID, name: "Supervisor" });
   };
 
   return (

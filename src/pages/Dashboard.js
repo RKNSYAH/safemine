@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Shield, Camera, LogOut, X, RotateCw } from "lucide-react";
 import AlertList from "../components/AlertList";
 import POVCard from "../components/POVCard";
-
+import { useAuth } from "../App";
+import Cookies from "js-cookie";
 const Dashboard = () => {
   const [alerts, setAlerts] = useState([]);
   const [selectedPOV, setSelectedPOV] = useState(null);
   const [workers, setWorkers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { logout } = useAuth();
 
   const onSelectPOV = (pov) => {
     setSelectedPOV(pov);
@@ -16,7 +18,10 @@ const Dashboard = () => {
   useEffect(() => {
       async function getWorkers() {
         try {
-          const response = await fetch("https://safemine-backend.netlify.app/api/worker/101"); 
+          const token = Cookies.get('supervisorData');
+          const response = await fetch("https://safemine-backend-production.up.railway.app/worker/101",{headers: {
+            "Authorization": `Bearer ${token}`
+          }}); 
           const responseData = await response.json(); 
           const allDetections = responseData.data.flatMap(worker => worker.detections.map(detection => ({
                 ...detection,
@@ -69,7 +74,9 @@ const Dashboard = () => {
               </p>
             </div>
           </div>
-          <button className="flex items-center gap-2 bg-slate-700/50 hover:bg-slate-600/50 text-slate-200 px-4 py-2 rounded-lg transition-colors text-sm">
+          <button onClick={() => {
+            logout();
+          }} className="flex items-center gap-2 bg-slate-700/50 hover:bg-slate-600/50 text-slate-200 px-4 py-2 rounded-lg transition-colors text-sm">
             <LogOut className="w-4 h-4" />
             Logout
           </button>
@@ -109,7 +116,7 @@ const Dashboard = () => {
               <div className="w-2 h-2 rounded-full bg-green-400"></div>Online
             </p>
             <p className="text-3xl font-bold text-green-400">
-              {povs.filter((p) => p.status === "live").length}
+              {povs.filter((p) => p.isLoggedIn === true).length}
             </p>
           </div>
           <div className="bg-slate-800/30 border border-slate-700 rounded-lg p-4">
@@ -177,7 +184,7 @@ const Dashboard = () => {
                   Recent Alerts from this Engineer
                 </h4>
                 <AlertList
-                  alerts={alerts.filter((a) => a.worker === selectedPOV.id)}
+                  alerts={alerts.filter((a) => a.worker === selectedPOV.id).sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp)  )}
                   title={`${selectedPOV.workerName}'s Alerts`}
                 />
               </div>
