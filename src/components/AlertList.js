@@ -53,7 +53,7 @@ const AlertList = ({ alerts, title = "Recent Alerts" }) => (
         alerts
           .slice()
           .reverse()
-          .slice(0, 10)
+          .slice(0, 25)
           .map((alert) => <AlertItem key={alert.id} alert={alert} />)
       )}
     </div>
