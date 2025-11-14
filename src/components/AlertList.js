@@ -26,11 +26,7 @@ const AlertItem = ({ alert }) => {
             </div>
             <span className="text-xs opacity-75 whitespace-nowrap">
               {
-                new Intl.DateTimeFormat("en-US", {
-                timeZone: "Indonesia/Jakarta",
-                dateStyle: "full",
-                timeStyle: "short",
-              }).format(new Date(alert.timeStamp).toLocaleString())
+                new Date(alert.timeStamp).toLocaleString("en-US", {timeZone: "UTC"})
               }
             </span>
           </div>
