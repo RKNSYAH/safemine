@@ -25,7 +25,13 @@ const AlertItem = ({ alert }) => {
               )}
             </div>
             <span className="text-xs opacity-75 whitespace-nowrap">
-              {new Date(alert.timeStamp).toLocaleString()}
+              {
+                new Intl.DateTimeFormat("en-US", {
+                timeZone: "Indonesia/Jakarta",
+                dateStyle: "full",
+                timeStyle: "short",
+              }).format(new Date(alert.timeStamp).toLocaleString())
+              }
             </span>
           </div>
           <div className="flex items-center gap-1 mt-2 text-xs opacity-75">
