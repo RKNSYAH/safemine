@@ -10,7 +10,7 @@ export const SupervisorLogin = () => {
 
   const onLogin = async () => {
     try {
-      const res = await fetch("https://safemine-backend-production-1160.up.railway.app/supervisor/login", {
+      const res = await fetch("https://safemine-backend-production-24aa.up.railway.app/supervisor/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
