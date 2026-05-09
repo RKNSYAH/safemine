@@ -19,7 +19,7 @@ const Dashboard = () => {
       async function getWorkers() {
         try {
           const token = Cookies.get('supervisorData');
-          const response = await fetch("https://safemine-backend-production-24aa.up.railway.app/worker/101",{headers: {
+          const response = await fetch("https://zonal-presence-production.up.railway.app/worker/101",{headers: {
             "Authorization": `Bearer ${token}`
           }}); 
           const responseData = await response.json(); 
