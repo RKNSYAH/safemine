@@ -32,7 +32,7 @@ export const SupervisorLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="bg-tone backdrop-blur-md border border-slate-700/50 rounded-2xl p-8 shadow-2xl">
           <div className="flex items-center justify-center gap-2 mb-8">
@@ -80,7 +80,7 @@ export const SupervisorLogin = () => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-secondary to-secondary hover:from-secondary hover:to-secondary text-primary font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
+              className="w-full bg-secondary text-primary font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
             >
               Login
             </button>

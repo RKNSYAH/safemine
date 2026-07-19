@@ -6,7 +6,7 @@ import {
 const POVCard = ({ pov, onClick }) => (
   <div
     onClick={onClick}
-    className="relative rounded-lg overflow-hidden cursor-pointer group bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-700 hover:border-slate-600 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+    className="relative rounded-lg overflow-hidden cursor-pointer group bg-slate-700 border border-slate-700 hover:border-slate-600 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
   >
     {/* Status Badge */}
     <div className="absolute top-3 left-3 z-10">
